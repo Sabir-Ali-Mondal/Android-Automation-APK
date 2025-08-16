@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/background_color">
+
+    <!-- App Title -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary_text"
+        android:gravity="center"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Instructions -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/instructions_text"
+        android:textSize="14sp"
+        android:textColor="@color/secondary_text"
+        android:layout_marginBottom="16dp"
+        android:lineSpacingExtra="4dp" />
+
+    <!-- JSON Input Label -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/json_input_label"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary_text"
+        android:layout_marginBottom="8dp" />
+
+    <!-- JSON Input EditText -->
+    <EditText
+        android:id="@+id/json_input_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="@string/json_input_hint"
+        android:gravity="top|start"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/hint_text"
+        android:textSize="14sp"
+        android:fontFamily="monospace"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Button Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:spacing="8dp">
+
+        <!-- Enable Accessibility Button -->
+        <Button
+            android:id="@+id/enable_accessibility_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enable_accessibility"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:textColor="@color/button_text" />
+
+        <!-- Run Automation Button -->
+        <Button
+            android:id="@+id/run_automation_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/run_automation"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:background="@drawable/button_background"
+            android:textColor="@color/button_text" />
+
+    </LinearLayout>
+
+</LinearLayout>
