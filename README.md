@@ -111,28 +111,30 @@ RULES:
 4. Coordinates must match the given resolution.
 5. Delay is in milliseconds and applies before the next step.
 6. Use the fewest steps possible to complete the task.
+7. This device uses **gesture navigation**:
+   - To go to home screen → swipe up from bottom-center ({x: SCREEN_WIDTH/2, y: SCREEN_HEIGHT-10} to {x: SCREEN_WIDTH/2, y: SCREEN_HEIGHT/2}).
+   - To open the app drawer → swipe up again from mid-screen.
+8. Always use the **app drawer search bar** (at {x: SCREEN_WIDTH/2, y: SCREEN_HEIGHT-60}) to launch apps instead of tapping app icons directly.
+9. After opening the target app, continue the task steps as described.
 
 EXAMPLE:
 TASK: "Open YouTube and search for 'lofi music'"
 {
   "steps": [
-    { "action": "tap", "x": 540, "y": 1800, "delay": 1000 },
-    { "action": "type", "text": "YouTube", "delay": 1500 },
-    { "action": "tap", "x": 500, "y": 450, "delay": 3000 },
-    { "action": "tap", "x": 300, "y": 150, "delay": 500 },
-    { "action": "type", "text": "lofi music", "delay": 1000 }
+    { "action": "swipe", "startX": 360, "startY": 1520, "endX": 360, "endY": 760, "delay": 4000 },
+    { "action": "swipe", "startX": 360, "startY": 700, "endX": 360, "endY": 200, "delay": 4000 },
+    { "action": "tap", "x": 360, "y": 1480, "delay": 4000 },
+    { "action": "type", "text": "YouTube", "delay": 5000 },
+    { "action": "tap", "x": 200, "y": 280, "delay": 6000 },
+    { "action": "tap", "x": 360, "y": 100, "delay": 4000 },
+    { "action": "type", "text": "lofi music", "delay": 5000 }
   ]
 }
+
 ```
 
-Working proto ✅
 
-1. **Prompt 1 → Dataset Builder (from screenshots like you shared)**
-2. **Prompt 2 → Automation Task JSON Generator (uses dataset for better accuracy)**
-
----
-
-## 🔹 Prompt 1: Dataset Builder (from screenshots)
+## 🔹 Dataset Builder (from screenshots)
 
 ```
 You are an Android UI dataset builder.
@@ -171,39 +173,7 @@ RULES:
 3. Capture the app drawer search bar, dock position, and icon grid details.
 ```
 
----
 
-## 🔹 Prompt 2: Automation Task JSON Generator (using dataset)
-
-```
-You are an automation task designer for an Android automation app.
-
-INPUTS:
-1. Dataset JSON of the device UI (generated separately).
-2. Task description: "{TASK_DESCRIPTION}"
-
-GOAL:
-Output a JSON automation flow to complete the task with accurate taps/swipes.
-
-RULES:
-1. Output ONLY valid JSON.
-2. Actions allowed: "tap", "swipe", "type", "wait".
-3. Fields:
-   - tap: { "action": "tap", "x": <int>, "y": <int>, "delay": <int> }
-   - swipe: { "action": "swipe", "startX": <int>, "startY": <int>, "endX": <int>, "endY": <int>, "delay": <int> }
-   - type: { "action": "type", "text": "<string>", "delay": <int> }
-   - wait: { "action": "wait", "delay": <int> }
-4. Always begin by returning to the home screen (swipe up if gesture navigation is enabled).
-5. For app launching, use the app drawer search bar from the dataset.
-6. Use the fewest steps possible.
-7. Delay must be at least 3000ms between steps (slow and safe).
-```
-
----
-
-✅ With this separation:
-
-* **Prompt 1** → you feed screenshots → get dataset JSON.
-* **Prompt 2** → you feed dataset JSON + task → get automation steps.
+* **Prompt** → you feed screenshots → get dataset JSON.
 
 
